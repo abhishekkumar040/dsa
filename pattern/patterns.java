@@ -240,3 +240,42 @@
 // }
 
 
+
+import java.util.Scanner;
+
+public class patterns {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt(); // Read 'n' from the user
+        scanner.close();
+        
+        pattern1(n);
+    }
+
+    public static void pattern1(int n) {
+        // Upper half (Pyramid)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < 2 * i + 1; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        
+        // Lower half (Inverted Pyramid)
+        for (int i = 0; i < n; i++) {
+            // Print leading spaces
+            for (int j = 0; j < i; j++) {
+                System.out.print(" ");
+            }
+            // Print stars
+            for (int j = 0; j < 2 * (n - i) - 1; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
