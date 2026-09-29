@@ -96,4 +96,49 @@
 //     }
 // }
 
+import java.util.HashMap;
 
+public class Isomorphic {
+    public boolean isomorphicString(String s, String t) {
+        // Edge case: if lengths differ, they can't be isomorphic
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        HashMap<Character, Character> mapS2T = new HashMap<>();
+        HashMap<Character, Character> mapT2S = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char charS = s.charAt(i);
+            char charT = t.charAt(i);
+
+            // Check if mapping from s -> t already exists and is inconsistent
+            if (mapS2T.containsKey(charS) && mapS2T.get(charS) != charT) {
+                return false;
+            }
+
+            // Check if mapping from t -> s already exists and is inconsistent
+            if (mapT2S.containsKey(charT) && mapT2S.get(charT) != charS) {
+                return false;
+            }
+
+            // Establish the mappings
+            mapS2T.put(charS, charT);
+            mapT2S.put(charT, charS);
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Isomorphic solver = new Isomorphic();
+
+        String s1 = "egg";
+        String t1 = "add";
+        System.out.println("Test 1 (\"egg\", \"add\"): " + solver.isomorphicString(s1, t1)); // Expected: true
+
+        String s2 = "apple";
+        String t2 = "bbnbm";
+        System.out.println("Test 2 (\"apple\", \"bbnbm\"): " + solver.isomorphicString(s2, t2)); // Expected: false
+    }
+}
