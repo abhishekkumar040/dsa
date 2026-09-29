@@ -142,3 +142,73 @@ public class Isomorphic {
         System.out.println("Test 2 (\"apple\", \"bbnbm\"): " + solver.isomorphicString(s2, t2)); // Expected: false
     }
 }
+
+
+import java.util.Arrays;
+
+public class Solution {
+    public boolean isAnagram(String s, String t) {
+        // Agar lengths barabar nahi hain
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        // Strings ko character array mein badal kar sort karo
+        char[] sArray = s.toCharArray();
+        char[] tArray = t.toCharArray();
+        Arrays.sort(sArray);
+        Arrays.sort(tArray);
+        
+        // Check karo ki dono sorted arrays barabar hain ya nahi
+        return Arrays.equals(sArray, tArray);
+    }
+
+    // VS Code mein code run karne ke liye main method
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        String s1 = "anagram";
+        String t1 = "nagaram";
+        System.out.println("Test 1: " + solution.isAnagram(s1, t1)); // Expected: true
+
+        String s2 = "rat";
+        String t2 = "car";
+        System.out.println("Test 2: " + solution.isAnagram(s2, t2)); // Expected: false
+    }
+}
+
+
+import java.util.*;
+
+public class Solution {
+    public String frequencySort(String s) {
+        // Count frequencies for all characters
+        Map<Character, Integer> counts = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            counts.put(c, counts.getOrDefault(c, 0) + 1);
+        }
+        
+        // Put characters into a list and sort by frequency descending
+        List<Character> list = new ArrayList<>(counts.keySet());
+        list.sort((a, b) -> counts.get(b) - counts.get(a));
+        
+        // Build the result string
+        StringBuilder sb = new StringBuilder();
+        for (char c : list) {
+            int freq = counts.get(c);
+            for (int i = 0; i < freq; i++) {
+                sb.append(c);
+            }
+        }
+        
+        return sb.toString();
+    }
+
+    // Optional main method if you want to test it locally in VS Code
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String test = "tree";
+        System.out.println("Input: " + test);
+        System.out.println("Output: " + sol.frequencySort(test));
+    }
+}
