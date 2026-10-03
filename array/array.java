@@ -121,3 +121,60 @@ class solution {
     }
 }
 
+import java.util.ArrayList;
+
+class Solution {
+    public int[] unionArray(int[] nums1, int[] nums2) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int i = 0, j = 0, n = nums1.length, m = nums2.length;
+        
+        while (i < n || j < m) {
+            int val;
+            if (i < n && (j >= m || nums1[i] <= nums2[j])) {
+                val = nums1[i++];
+            } else {
+                val = nums2[j++];
+            }
+            
+            // Add only if it's the first element or different from the last added
+            if (list.isEmpty() || list.get(list.size() - 1) != val) {
+                list.add(val);
+            }
+        }
+        
+        return list.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
+
+import java.util.ArrayList;
+
+class Solution {
+    public int[] intersectionArray(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
+        int i = 0, j = 0;
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        while (i < n && j < m) {
+            if (nums1[i] < nums2[j]) {
+                i++;
+            } else if (nums2[j] < nums1[i]) {
+                j++;
+            } else {
+                // Both elements are equal, add to result and move both pointers
+                ans.add(nums1[i]);
+                i++;
+                j++;
+            }
+        }
+        
+        // Convert ArrayList to primitive int array
+        int[] result = new int[ans.size()];
+        for (int k = 0; k < ans.size(); k++) {
+            result[k] = ans.get(k);
+        }
+        
+        return result;
+    }
+}
