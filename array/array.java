@@ -178,3 +178,46 @@ class Solution {
         return result;
     }
 }
+
+
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int count=0;
+        int candidate=0;
+        for(int num : nums){
+            if(count==0){
+                candidate=num;
+            }if(num==candidate){
+                count++;
+            }else{
+                count--;
+            }
+        }
+        return candidate;
+        
+    }
+}
+
+
+
+class Solution {
+    public List<Integer> leaders(int[] nums) {
+        List<integer> ans=new ArrayList<>();
+        if(nums==null || nums.length==0){
+            return ans;
+        }
+        int n=nums.length;
+        int max=nums[n-1];
+        ans.add(max);
+        for(int i=n-2;i>=n;i--){
+            if(nums[i]>max){
+                max=nums[i];
+                ans.add(max);
+            }
+        }
+        Collection.reverse(ans);
+        return ans;
+        
+    }
+}
