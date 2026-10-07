@@ -223,9 +223,6 @@ class Solution {
 }
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> triangle = new ArrayList<>();
@@ -255,5 +252,42 @@ class Solution {
         }
         
         return triangle;
+    }
+}
+
+
+
+class Solution {
+    public List<Integer> getRow(int r) {
+        int[] ans = new int[r + 1];
+        ans[0] = 1;
+        long current = 1;
+        
+        for (int i = 1; i <= r; i++) {
+            current = current * (r - i + 1);
+            current = current / i;
+            ans[i] = (int) current;
+        }
+        
+        List<Integer> list = new ArrayList<>();
+        for (int val : ans) {
+            list.add(val);
+        }
+        return list;
+    }
+}
+
+class Solution {
+    public int[] pascalTriangleII(int r) {
+        int [] ans=new int [r];
+        ans[0]=1;
+        long current =1;
+        for (int i=1;i<r;i++){
+            current=current*(r-i);
+            current=current/i;
+            ans[i]=(int)current;
+        }
+        return ans;
+
     }
 }
