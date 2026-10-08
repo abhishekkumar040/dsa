@@ -291,3 +291,103 @@ class Solution {
 
     }
 }
+
+
+
+class Solution {
+    public List<List<Integer>> pascalTriangleIII(int n) {
+        List<List<Integer>> triangle = new ArrayList<>();
+        
+        if (n <= 0) {
+            return triangle;
+        }
+
+        for (int i = 0; i < n; i++) {
+            List<Integer> row = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                // The first and last elements of each row are 1
+                if (j == 0 || j == i) {
+                    row.add(1);
+                } else {
+                    // Sum of the two elements directly above
+                    List<Integer> prevRow = triangle.get(i - 1);
+                    row.add(prevRow.get(j - 1) + prevRow.get(j));
+                }
+            }
+            triangle.add(row);
+        }
+        
+        return triangle;
+    }
+}
+
+
+class Solution {
+    public void rotateMatrix(int[][] matrix) {
+        int n = matrix.length;
+        
+        // Step 1: Transpose the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        
+        // Step 2: Reverse each row
+        for (int i = 0; i < n; i++) {
+            int left = 0, right = n - 1;
+            while (left < right) {
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+}
+
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int col0 = 1;
+
+        // Step 1: Mark rows and columns using the first row and column
+        for (int i = 0; i < m; i++) {
+            if (matrix[i][0] == 0) col0 = 0;
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        // Step 2: Update the inner matrix using the markers
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        // Step 3: Update the first row if needed
+        if (matrix[0][0] == 0) {
+            for (int j = 0; j < n; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+        // Step 4: Update the first column if needed
+        if (col0 == 0) {
+            for (int i = 0; i < m; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
+}
