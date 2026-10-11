@@ -463,3 +463,72 @@ class Solution {
         return result;
     }
 }
+
+
+
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int n = nums.length;
+        int ind = -1;
+
+        // Step 1: Find the break point
+        for (int i = n - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                ind = i;
+                break;
+            }
+        }
+
+        // If no break point exists, reverse the entire array
+        if (ind == -1) {
+            reverse(nums, 0, n - 1);
+            return;
+        }
+
+        // Step 2: Find the next greater element and swap with nums[ind]
+        for (int i = n - 1; i > ind; i--) {
+            if (nums[i] > nums[ind]) {
+                int temp = nums[i];
+                nums[i] = nums[ind];
+                nums[ind] = temp;
+                break;
+            }
+        }
+
+        // Step 3: Reverse the right half
+        reverse(nums, ind + 1, n - 1);
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}
+
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        long maxi = Long.MIN_VALUE; // maximum sum
+        long sum = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+
+            if (sum > maxi) {
+                maxi = sum;
+            }
+
+            // If sum falls below zero, reset it to 0
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+
+        return (int) maxi;
+    }
+}
