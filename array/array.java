@@ -121,7 +121,6 @@ class solution {
     }
 }
 
-import java.util.ArrayList;
 
 class Solution {
     public int[] unionArray(int[] nums1, int[] nums2) {
@@ -146,7 +145,6 @@ class Solution {
     }
 }
 
-import java.util.ArrayList;
 
 class Solution {
     public int[] intersectionArray(int[] nums1, int[] nums2) {
